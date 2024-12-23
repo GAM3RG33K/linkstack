@@ -10,9 +10,12 @@ permissions:
   pages: write
   id-token: write
 
-jobs:
+jobs:  
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v3
@@ -44,11 +47,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
-      - name: Create CNAME
-        if: success()
-        run: |
-          echo "links.harshjoshi.dev" > ./dist/CNAME
 
   # Optional: Add CNAME file
   update-cname:
