@@ -3,16 +3,14 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-      branches: [ main ]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-jobs:  
-  build:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -51,7 +49,7 @@ jobs:
 
   # Optional: Add CNAME file
   update-cname:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     if: success()
     

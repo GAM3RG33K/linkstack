@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import analytics from '../utils/analytics'
-import SocialButtons from './SocialButtons'
-import ProfileButtons from './ProfileButtons'
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import analytics from "../utils/analytics";
+import SocialButtons from "./SocialButtons";
+import ProfileButtons from "./ProfileButtons";
+import { Button } from "@/components/ui/button";
 
 function Profile() {
-  const [showCopyAlert, setShowCopyAlert] = useState(false)
+  const [showCopyAlert, setShowCopyAlert] = useState(false);
 
   const handleShare = async () => {
-    const valueToShare = 'https://links.harshjoshi.dev'
-    
+    const valueToShare = "https://links.harshjoshi.dev";
+
     try {
       if (navigator.share) {
         await navigator.share({
           title: "Share this page",
           url: valueToShare,
-        })
-        analytics.track('share_clicked', { method: 'native' })
+        });
+        analytics.track("share_clicked", { method: "native" });
       } else {
-        await navigator.clipboard.writeText(valueToShare)
-        setShowCopyAlert(true)
-        setTimeout(() => setShowCopyAlert(false), 2000)
-        analytics.track('share_clicked', { method: 'clipboard' })
+        await navigator.clipboard.writeText(valueToShare);
+        setShowCopyAlert(true);
+        setTimeout(() => setShowCopyAlert(false), 2000);
+        analytics.track("share_clicked", { method: "clipboard" });
       }
     } catch (err) {
-      console.error('Error:', err)
-      analytics.track('share_error', { error: err.message })
+      console.error("Error:", err);
+      analytics.track("share_error", { error: err.message });
     }
-  }
+  };
 
   return (
     <div className="container mx-auto px-12 py-24 ">
@@ -53,13 +53,13 @@ function Profile() {
           src="/images/logo.svg"
         />
 
-        <h1 className="text-4xl font-bold text-white">
+        <h1 className="text-4xl font-bold text-white flex items-center justify-center gap-1">
           Harshvardhan Joshi
-          <span className="ml-2 inline-block">
-            <svg className="w-6 h-6 text-blue-400" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-            </svg>
-          </span>
+          <img
+            alt="Verified"
+            className="inline-block w-7 h-7 -mt-1"
+            src="/images/verified.svg"
+          />
         </h1>
 
         <div className="space-y-4">
@@ -71,7 +71,7 @@ function Profile() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Profile 
+export default Profile;
