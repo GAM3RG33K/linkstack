@@ -4,19 +4,22 @@ on:
   push:
     branches: [ main ]
   pull_request:
-      branches: [ main ]
+    branches: [ main ]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-jobs:  
-  build:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +54,7 @@ jobs:
 
   # Optional: Add CNAME file
   update-cname:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     if: success()
     
