@@ -1,0 +1,50 @@
+---
+description: UI/UX design standards for LinkStack — sourced from antigravity ui-ux-pro-max and web-design-guidelines skills
+globs: src/**/*.{jsx,css}
+alwaysApply: false
+---
+
+# LinkStack UI Design Rules
+
+Apply when designing or refactoring UI components, layouts, colors, typography, or interactions.
+
+## Source Skills
+
+- `/Users/w1n/utils/scripts/antigravity-skills/skills/ui-ux-pro-max/SKILL.md`
+- `/Users/w1n/utils/scripts/antigravity-skills/skills/web-design-guidelines/SKILL.md`
+
+Run design system lookup when starting major UI work:
+
+```bash
+python3 /Users/w1n/utils/scripts/antigravity-skills/skills/ui-ux-pro-max/scripts/search.py "<product> <style> <keywords>" --design-system -p "LinkStack"
+```
+
+## Design Tokens (LinkStack)
+
+- Background: `--bg-deep` (#030712), `--bg-surface` (#0F172A)
+- Accent: `--accent` (#3B82F6)
+- Text: `--text-primary` (#F1F5F9), `--text-secondary` (#94A3B8)
+- Fonts: JetBrains Mono (headings), IBM Plex Sans (body)
+- Style: dark glassmorphism, bento grid, subtle particle background
+
+## Priority Checklist
+
+1. **Accessibility**: 4.5:1 contrast, alt text, aria-labels on icon-only controls, visible focus rings
+2. **Touch**: min 44×44px targets, 8px+ spacing between interactive elements
+3. **Layout**: mobile-first, no horizontal scroll, use `min-h-dvh`, full-width content should fill space intentionally
+4. **Animation**: 150–300ms micro-interactions, transform/opacity only, respect `prefers-reduced-motion`
+5. **Icons**: SVG only, consistent stroke width, no emoji as structural icons
+
+## Anti-Patterns
+
+- Centered narrow column with large empty margins on desktop
+- Left-aligned icons with centered text in buttons (asymmetric padding)
+- Hardcoded hex in components — use CSS variables or Tailwind tokens
+- Animating width/height/top/left (use transform instead)
+- Hover-only interactions without tap/keyboard fallback
+
+## Component Patterns
+
+- **Hero header**: horizontal split (avatar left, identity right), skill chips from headline, mesh gradient fill
+- **Bento cards**: mouse-following radial spotlight via `--mouse-x` / `--mouse-y`
+- **Stagger**: entrance animations with 50ms incremental delays
